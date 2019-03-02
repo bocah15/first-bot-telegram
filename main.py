@@ -38,8 +38,7 @@ def loadDB():
     firstname TEXT, 
     Nama TEXT,
     NIM_or_NIP TEXT,
-    EMAIL TEXT,
-    Status TEXT DEFAULT 'Dosen');'''
+    EMAIL TEXT);'''
                       )
     conn.commit()
     conn.close()
@@ -63,9 +62,6 @@ def checkUser(update, user_data):
         c = cur.execute('''SELECT Email FROM userdata WHERE id = ?''',
                         (update.message.from_user.id,)).fetchone()
         user_data['Email'] = c[0]
-        c = cur.execute('''SELECT Status FROM userdata WHERE id = ?''',
-                        (update.message.from_user.id,)).fetchone()
-        user_data['Status'] = c[0]
         print("Pass user")
     else:
         cur.execute('''INSERT OR IGNORE INTO userdata (id, firstname) VALUES (?, ?)''',
